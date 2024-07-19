@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Crossword Drill{% endblock %}
+
+{% block content %}
+<h1>Crossword Drill</h1>
+{% if clue_id %}
+<form method="post" action="{% url 'xword-drill' %}">
+  {% csrf_token %}
+  <input type="hidden" name="clue_id" value="{{ clue_id }}">
+  <label for="answer">Answer:</label>
+  <input type="text" name="answer" id="answer">
+  <button type="submit">Submit</button>
+</form>
+{% else %}
+<p>No clues available.</p>
+{% endif %}
+
+<p>{{clue_id}} is the correct answer! You have now answered {{ correct_answers }} (of ) clues correctlyyyyyy.</p>
+<a href="{% url 'xword-answer' clue_id %}">Get the answer</a>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% endblock %}
+

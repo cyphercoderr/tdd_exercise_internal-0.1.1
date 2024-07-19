@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Answer{% endblock %}
+
+{% block content %}
+<h1>Answer</h1>
+<p>The answer for "{{ clue.clue_text }}" is "{{ clue.entry.entry_text }}"</p>
+{% if unique_message %}
+    <p>{{ unique_message }}</p>
+  {% endif %}
+<h2>Statistics</h2>
+<table border="1">
+    <tr>
+        <th>Count</th>
+        <th>Entry</th>
+    </tr>
+    {% for entry in entries_stats %}
+        <tr>
+            <td>{{ entry.count }}</td>
+            <td>{{ entry.entry__entry_text }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% if correct_answers_message %}
+    <p>{{ correct_answers_message }}</p>
+{% endif %}
+{% endblock %}
